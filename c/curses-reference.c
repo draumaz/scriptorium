@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <curses.h> // <3
 
-// -lncurses -lm (Linux/BSD: -ltinfo)
+// -lncurses (Linux/BSD: -ltinfo)
 
 int main() {
         initscr(); // let's get this going
