@@ -53,11 +53,13 @@ fi
 export kern="kernel_config-$(uname -r)_$(date -I)_$(date +%T | sed 's/:/-/g')"
 echo -e "${RED}> Compiling files${WHITE}"
 mkdir $mkcom portage dotfiles
+
 comp_one+=("${make_conf_pth}" "${kernel_config_pth}" "${package_use_pth}" "${i3_config_pth}" \
 	"${i3_status_config_pth}" "${bashrc_pth}")
-comp_two+=("portage/make.conf" "dotfiles/${kern}" "${dotfiles}/package.use" "dotfiles/i3-config" "dotfiles/i3status-config" "dotfiles/bashrc")
-
-for i in {0..7}; do cp $copcom "${comp_one[i]}" ./"${comp_two[i]}"; done
+comp_two+=("portage/make.conf" "dotfiles/${kern}" "${dotfiles}/package.use" "dotfiles/i3-config" \ 
+	"dotfiles/i3status-config" "dotfiles/bashrc")
+	
+for i in {0..5}; do cp $copcom "${comp_one[i]}" ./"${comp_two[i]}"; done
 
 if [ "${1:2}" == "no-build" ] || [ "${2:2}" == "no-build" ] || [ "${3:2}" == "no-build" ] || \
    [ "${1:1:1}" == "n" ] || [ "${1:2:1}" == "n" ] || [ "${1:3:1}" == "n" ] || \
