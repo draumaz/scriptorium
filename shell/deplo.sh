@@ -39,14 +39,12 @@ if [ "${1:2}" == "quiet" ] || [ "${2:2}" == "quiet" ] || [ "${3:2}" == "quiet" ]
    [ "${1:1:1}" == "q" ] || [ "${1:2:1}" == "q" ] || [ "${1:3:1}" == "q" ] || \
    [ "${2:1:1}" == "q" ] || [ "${2:2:1}" == "q" ] || [ "${2:3:1}" == "q" ] || \
    [ "${3:1:1}" == "q" ] || [ "${3:2:1}" == "q" ] || [ "${3:3:1}" == "q" ]; then
-	export copcom=""
-	export copcom2=""
+	export copcom="-r"
 	export mkcom="-p"
 	export tarcom="-cf"
 	export remcom="-r"
 else
-	export copcom="-v"
-	export copcom2="-rv"
+	export copcom="-rv"
 	export mkcom="-pv"
 	export tarcom="cvf"
 	export remcom="-rv"
@@ -55,11 +53,11 @@ fi
 export kern="kernel_config-$(uname -r)_$(date -I)_$(date +%T | sed 's/:/-/g')"
 echo -e "${RED}> Compiling files${WHITE}"
 mkdir $mkcom portage dotfiles
-cp $copcom2 $package_use_pth portage/
-comp_one+=("${make_conf_pth}" "${kernel_config_pth}" "${i3_config_pth}" \
+comp_one+=("${make_conf_pth}" "${kernel_config_pth}" "${package_use_pth}" "${i3_config_pth}" \
 	"${i3_status_config_pth}" "${bashrc_pth}")
-comp_two+=("portage/make.conf" "dotfiles/${kern}" "dotfiles/i3-config" "dotfiles/i3status-conf" "dotfiles/bashrc")
-for i in {0..4}; do cp $copcom "${comp_one[i]}" ./"${comp_two[i]}"; done
+comp_two+=("portage/make.conf" "dotfiles/${kern}" "${dotfiles}/package.use" "dotfiles/i3-config" "dotfiles/i3status-config" "dotfiles/bashrc")
+
+for i in {0..7}; do cp $copcom "${comp_one[i]}" ./"${comp_two[i]}"; done
 
 if [ "${1:2}" == "no-build" ] || [ "${2:2}" == "no-build" ] || [ "${3:2}" == "no-build" ] || \
    [ "${1:1:1}" == "n" ] || [ "${1:2:1}" == "n" ] || [ "${1:3:1}" == "n" ] || \
