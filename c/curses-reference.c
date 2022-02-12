@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <curses.h> // <3
 
-// -lncurses (Linux/BSD: -ltinfo)
+// -lncurses (Linux -ltinfo)
 
 int main() {
         initscr(); // let's get this going
@@ -15,8 +15,7 @@ int main() {
         printw("\nPress a key.\n");
         refresh(); // like blitting but for curses
         keypad(stdscr, true); // make the arrows actually fucking work
-        int v; v = getch();
-        switch (v) {
+        switch (getch()) {
                 case KEY_UP:
                         printw("UP!");
                         refresh();
@@ -25,7 +24,8 @@ int main() {
                         printw("DOWN!");
                         refresh();
                         break;
-        } sleep(1);
+        }
+        sleep(1);
         endwin(); // fuck off
         curs_set(1); // bring that back
         system("stty sane"); // or 'pause' if you use windows
