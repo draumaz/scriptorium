@@ -4,6 +4,6 @@
 
 export HOMEPAGE=""
 
-st -e bash -c 'tmux new-session -d -s drbr; 
-	tmux send-keys -t drbr "links '$HOMEPAGE'; tmux kill-session" enter; 
-	tmux attach -t drbr'
+st -e bash -c 'tmux new-session -d; 
+	tmux send-keys "links '$HOMEPAGE'; tmux kill-session" enter; 
+	tmux attach'
