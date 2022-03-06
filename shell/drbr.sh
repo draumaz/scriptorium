@@ -4,8 +4,6 @@
 
 export HOMEPAGE=""
 
-## TODO: end tmux session when user exits links
-
 st -e bash -c 'tmux new-session -d -s drbr; 
-	tmux send-keys -t drbr "links '$HOMEPAGE'" enter; 
+	tmux send-keys -t drbr "links '$HOMEPAGE'; tmux kill-session" enter; 
 	tmux attach -t drbr'
