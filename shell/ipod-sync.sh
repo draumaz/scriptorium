@@ -3,10 +3,10 @@
 
 ## BEGIN CONFIG ##
 
-LOCAL_MUSIC_FOLDER_PREFIX="" # e.g. /media/Storage/Music/
-DESTINATION_MUSIC_FOLDER="" # e.g. /home/gungo/iPod/Music
-DESTINATION_MOUNT_POINT="" # e.g. /home/gungo/iPod
 DESTINATION_MOUNT_DRIVE="" # e.g. /dev/sda2
+DESTINATION_MOUNT_POINT="" # e.g. /mnt/iPod
+DESTINATION_MUSIC_FOLDER="" # e.g. /mnt/iPod/Music (note the lack of a final slash)
+LOCAL_MUSIC_FOLDER="" # e.g. /media/Storage/Music/ (note the final slash)
 
 ## END CONFIG ##
 
