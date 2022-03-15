@@ -41,15 +41,12 @@ dev_mnt() {
 }
 
 rs_put() {
-	echo ""
 	"$SU" rsync $RSYNC_ARGUMENTS "$LOCAL_MUSIC_FOLDER_PREFIX" "$DESTINATION_MUSIC_FOLDER"
-	echo ""
 }
 
 fs_post() {
 	echo -n "syncing..."
 	if sync; then echo " done"; else echo " fail"; fi
-	echo ""
 }
 
 dev_umnt() {
