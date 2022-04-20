@@ -37,29 +37,44 @@ error_handler() {
 	exit
 }
 
-if [ "$(id -u)" == 1000 ]; then error_handler "NOT_ROOT"; fi
-if [ "$OVPN_LOGIN_FILE" == "" ]; then error_handler "NO_LOGIN"; fi
+help_screen() {
+	echo "Usage: sudo ./manage [options] [path/to/file.ovpn]"
+	echo " --enable    begin OpenVPN daemon"
+	echo " --disable   end OpenVPN daemon"
+	exit
+}
+
+root_check() {
+	if [ "$(id -u)" == 1000 ]; then error_handler "NOT_ROOT"; fi
+}
 
 case "$TYPE_FLAG" in
 	--*)
 		case "$TYPE_FLAG" in
 			"--enable")
+				root_check
 				if [ ! "$(ps aux | grep '[o]penvpn')" == "" ]; then error_handler "ALREADY_RUN"; fi
 				if [ "$OVPN_FILE" == "" ]; then error_handler "NO_SERVER"; fi
 				echo -n "connecting to $OVPN_FILE..."
 				openvpn --config "$OVPN_FILE" --auth-user-pass "$OVPN_LOGIN_FILE" --daemon
 				;;
 			"--disable")
+				root_check
 				if [ "$(ps aux | grep '[o]penvpn')" == "" ]; then error_handler "NOT_RUN"; fi
 				echo -n "disconnecting..."
 				pkill openvpn
 				;;
+			"--help")
+				help_screen
+				;;
 			*)
+				root_check
 				error_handler "INV_ARG"
 				;;
 		esac
 		;;
 	*)
+		root_check
 		error_handler "NO_ARG"
 		;;
 esac
