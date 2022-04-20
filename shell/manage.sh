@@ -12,19 +12,19 @@ error_handler() {
 	echo -n "ERROR: "
 	case "$1" in
 		"ALREADY_RUN")
-			echo "openvpn is already running"
+			echo "OpenVPN is already running"
 			;;
 		"NOT_RUN")
-			echo "openvpn is not running"
+			echo "OpenVPN is not running"
 			;;
 		"NO_SERVER")
-			echo "no ovpn file supplied"
+			echo "no .ovpn file supplied"
 			;;
 		"NO_LOGIN")
 			echo "OVPN_LOGIN_FILE path variable not found"
 			;;
 		"INV_ARG")
-			echo "invalid argument [--enable/disable]"
+			echo "invalid argument"
 			;;
 		"NO_ARG")
 			echo "no argument given"
@@ -51,23 +51,24 @@ root_check() {
 
 case "$TYPE_FLAG" in
 	--*)
+		VPN_STATUS="$(ps aux | grep '[o]penvpn')"
 		case "$TYPE_FLAG" in
 			"--enable")
 				root_check
-				if [ ! "$(ps aux | grep '[o]penvpn')" == "" ]; then error_handler "ALREADY_RUN"; fi
+				if [ ! "$VPN_STATUS" == "" ]; then error_handler "ALREADY_RUN"; fi
 				if [ "$OVPN_FILE" == "" ]; then error_handler "NO_SERVER"; fi
 				echo -n "connecting to $OVPN_FILE..."
 				openvpn --config "$OVPN_FILE" --auth-user-pass "$OVPN_LOGIN_FILE" --daemon
 				;;
 			"--disable")
 				root_check
-				if [ "$(ps aux | grep '[o]penvpn')" == "" ]; then error_handler "NOT_RUN"; fi
+				if [ "$VPN_STATUS" == "" ]; then error_handler "NOT_RUN"; fi
 				echo -n "disconnecting..."
 				pkill openvpn
 				;;
 			"--status")
-				if [ ! "$(ps aux | grep '[o]penvpn')" == "" ]; then 
-					echo "OpenVPN is currently running." 
+				if [ ! "$VPN_STATUS" == "" ]; then 
+					echo "OpenVPN is currently running" 
 					echo -n "IP: $(curl -s ifconfig.me)"; echo ""
 				else
 					echo "OpenVPN is not currently running"
