@@ -40,6 +40,8 @@ help_screen() {
 	echo "Usage: sudo ./manage [options] [path/to/file.ovpn]"
 	echo " --enable    begin OpenVPN daemon"
 	echo " --disable   end OpenVPN daemon"
+	echo " --status    check OpenVPN status"
+	echo " --help      display this screen"
 	exit
 }
 
