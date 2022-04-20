@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# draumaz/manage, 2022
-# MIT | CLI OpenVPN manager
+# draumaz/manage, 2022 | MIT
+# CLI OpenVPN manager
 
 export TYPE_FLAG="$1"
 export OVPN_FILE="$2"
