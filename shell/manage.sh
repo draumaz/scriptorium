@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# draumaz/manage, 2022 | MIT
+# draumaz/manage, 2022 | GPLv3
 # CLI OpenVPN manager
 
 export TYPE_FLAG="$1"
