@@ -63,6 +63,15 @@ case "$TYPE_FLAG" in
 				echo -n "disconnecting..."
 				pkill openvpn
 				;;
+			"--status")
+				if [ ! "$(ps aux | grep '[o]penvpn')" == "" ]; then 
+					echo "OpenVPN is currently running." 
+					echo -n "IP: $(curl -s ifconfig.me)"; echo ""
+				else
+					echo "OpenVPN is not currently running"
+				fi
+				exit
+				;;
 			"--help")
 				help_screen
 				;;
