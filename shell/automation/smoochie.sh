@@ -58,6 +58,7 @@ mv -vf decode.tmp tools/objtool/arch/x86/decode.c
 rm -vf decode.tmp
 
 # compile kernel
+
 echo -n "WAIT: .config "; read # move kernel config to /usr/src/linux/.config and hit enter
 make clean
 make -j16 -l16
