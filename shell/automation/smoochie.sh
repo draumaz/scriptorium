@@ -3,6 +3,10 @@
 # KISS Linux automated install script
 # Still can't figure out graphics tho
 
+# assumes a partition layout as follows:
+# 512MB FAT32: /boot
+# ...GB EXT4:  /
+
 # initialize repos directory
 
 cd /
