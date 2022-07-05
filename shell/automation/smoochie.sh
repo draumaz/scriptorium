@@ -58,7 +58,7 @@ mv -vf decode.tmp tools/objtool/arch/x86/decode.c
 rm -vf decode.tmp
 
 # compile kernel
-echo -n "WAIT: .config "; read # move kernel config to /mnt/kiss/usr/src/linux/.config and hit enter
+echo -n "WAIT: .config "; read # move kernel config to /usr/src/linux/.config and hit enter
 make clean
 make -j16 -l16
 make INSTALL_MOD_STRIP=1 modules_install
